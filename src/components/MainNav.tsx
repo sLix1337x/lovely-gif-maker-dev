@@ -14,16 +14,13 @@ const MainNav: React.FC = () => {
         </div>
         
         <nav className="hidden md:flex items-center space-x-6">
-          <a href="#" className="text-sm text-gray-300 hover:text-white">Features</a>
-          <a href="#" className="text-sm text-gray-300 hover:text-white">Pricing</a>
+          <a href="#features" className="text-sm text-gray-300 hover:text-white">Features</a>
+          <a href="#how-to" className="text-sm text-gray-300 hover:text-white">How To</a>
           <a href="#" className="text-sm text-gray-300 hover:text-white">Docs</a>
           <a href="#" className="text-sm text-gray-300 hover:text-white">About</a>
         </nav>
         
         <div className="flex items-center space-x-4">
-          <Button variant="outline" className="hidden sm:flex border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-gray-100">
-            Sign In
-          </Button>
           <Button className="bg-blue-600 hover:bg-blue-700 text-white button-glow">
             Get Started
           </Button>

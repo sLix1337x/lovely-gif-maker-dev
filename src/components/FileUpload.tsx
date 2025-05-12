@@ -23,15 +23,21 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileSelected }) => {
   };
 
   return (
-    <div className="flex flex-col items-center gap-4 p-6 border-2 border-dashed border-gray-300 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors">
-      <Upload className="h-12 w-12 text-gray-400" />
-      <h3 className="text-lg font-medium">Drop your video here</h3>
-      <p className="text-sm text-gray-500 text-center">
-        or click to browse (MP4, WebM, MOV)
+    <div className="flex flex-col items-center justify-center gap-4 p-8 border-2 border-dashed border-gray-600/40 rounded-lg bg-black/30 backdrop-blur-sm hover:bg-black/40 transition-colors mx-auto max-w-md">
+      <Upload className="h-12 w-12 text-blue-400" />
+      <h3 className="text-lg font-medium text-gray-200">Drop your video here</h3>
+      <p className="text-sm text-gray-400 text-center">
+        Drag & drop your video file here or click to browse
       </p>
+      <div className="flex items-center justify-center">
+        <span className="inline-flex items-center text-xs text-gray-400">
+          <div className="w-2 h-2 bg-blue-500 rounded-full mr-2"></div> Max file size: 50MB
+        </span>
+      </div>
       <Button 
         variant="outline" 
         onClick={() => fileInputRef.current?.click()}
+        className="border-gray-600 text-gray-300 hover:bg-gray-800"
       >
         Select Video
       </Button>

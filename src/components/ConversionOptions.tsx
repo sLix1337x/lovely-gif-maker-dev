@@ -37,28 +37,35 @@ const ConversionOptionsForm: React.FC<ConversionOptionsProps> = ({ options, onCh
   };
 
   return (
-    <div className="space-y-6 p-6 bg-white rounded-lg shadow">
-      <h3 className="text-lg font-medium">Conversion Options</h3>
+    <div className="space-y-6 p-6 border border-gray-700 rounded-lg bg-black/30 backdrop-blur-sm">
+      <h3 className="text-lg font-medium text-gray-200">Conversion Options</h3>
       
-      <div className="space-y-3">
-        <div>
-          <Label htmlFor="fps">
-            Frame Rate: {options.fps} fps
-          </Label>
+      <div className="space-y-6">
+        <div className="space-y-2">
+          <div className="flex justify-between">
+            <Label htmlFor="fps" className="text-gray-300">
+              Frames per second:
+            </Label>
+            <span className="text-blue-400 font-medium">{options.fps} fps</span>
+          </div>
           <Slider 
             id="fps"
             min={1} 
             max={30} 
             step={1}
             value={[options.fps || 10]} 
-            onValueChange={handleFpsChange} 
+            onValueChange={handleFpsChange}
+            className="cursor-pointer" 
           />
         </div>
 
-        <div>
-          <Label htmlFor="quality">
-            Quality: {options.quality} (Lower = Better)
-          </Label>
+        <div className="space-y-2">
+          <div className="flex justify-between">
+            <Label htmlFor="quality" className="text-gray-300">
+              Quality:
+            </Label>
+            <span className="text-blue-400 font-medium">{options.quality} (Lower = Better)</span>
+          </div>
           <Slider 
             id="quality"
             min={1} 
@@ -66,12 +73,13 @@ const ConversionOptionsForm: React.FC<ConversionOptionsProps> = ({ options, onCh
             step={1}
             value={[options.quality || 10]} 
             onValueChange={handleQualityChange}
+            className="cursor-pointer"
           />
         </div>
         
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <Label htmlFor="width">Width</Label>
+            <Label htmlFor="width" className="text-gray-300 mb-1 block">Width</Label>
             <Input
               id="width"
               name="width"
@@ -79,10 +87,11 @@ const ConversionOptionsForm: React.FC<ConversionOptionsProps> = ({ options, onCh
               placeholder="Auto"
               value={options.width || ''}
               onChange={handleSizeChange}
+              className="bg-gray-800/50 border-gray-700 text-gray-200"
             />
           </div>
           <div>
-            <Label htmlFor="height">Height</Label>
+            <Label htmlFor="height" className="text-gray-300 mb-1 block">Height</Label>
             <Input
               id="height"
               name="height"
@@ -90,6 +99,7 @@ const ConversionOptionsForm: React.FC<ConversionOptionsProps> = ({ options, onCh
               placeholder="Auto"
               value={options.height || ''}
               onChange={handleSizeChange}
+              className="bg-gray-800/50 border-gray-700 text-gray-200"
             />
           </div>
         </div>
