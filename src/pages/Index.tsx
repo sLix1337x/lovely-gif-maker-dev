@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import FileUpload from '@/components/FileUpload';
 import VideoPreview from '@/components/VideoPreview';
@@ -11,7 +10,6 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Wand2, Zap, Lock, CircleDollarSign, Settings, Info, Check, Link } from 'lucide-react';
 import MainNav from '@/components/MainNav';
 import { Link as RouterLink } from 'react-router-dom';
-
 const Index = () => {
   const [videoFile, setVideoFile] = useState<File | null>(null);
   const [gifBlob, setGifBlob] = useState<Blob | null>(null);
@@ -22,38 +20,32 @@ const Index = () => {
     trimEnabled: false,
     startTime: 0
   });
-
   const handleFileSelected = (file: File) => {
     setVideoFile(file);
     setGifBlob(null);
   };
-
   const handleConvert = async () => {
     if (!videoFile) return;
-    
     setIsConverting(true);
-    
     try {
       const blob = await convertVideoToGif(videoFile, conversionOptions);
       setGifBlob(blob);
       toast({
         title: "Conversion successful!",
-        description: "Your GIF has been created. You can now download it.",
+        description: "Your GIF has been created. You can now download it."
       });
     } catch (error) {
       console.error('Conversion error:', error);
       toast({
         title: "Conversion failed",
         description: "There was an error converting your video. Please try again.",
-        variant: "destructive",
+        variant: "destructive"
       });
     } finally {
       setIsConverting(false);
     }
   };
-
-  return (
-    <div className="min-h-screen bg-gradient-dark">
+  return <div className="min-h-screen bg-gradient-dark">
       <MainNav />
       <div className="container mx-auto py-10 px-4 relative">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-96 pointer-events-none">
@@ -67,70 +59,44 @@ const Index = () => {
           </p>
         </header>
 
-        <div className="grid md:grid-cols-2 gap-10 relative z-10 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-1 gap-10 relative z-10 max-w-5xl mx-auto">
           <div className="space-y-8">
-            {!videoFile ? (
-              <Card className="border border-gray-700 bg-secondary/50 backdrop-blur-sm overflow-hidden">
+            {!videoFile ? <Card className="border border-gray-700 bg-secondary/50 backdrop-blur-sm overflow-hidden">
                 <CardContent className="pt-6 flex justify-center">
                   <FileUpload onFileSelected={handleFileSelected} />
                 </CardContent>
-              </Card>
-            ) : (
-              <>
+              </Card> : <>
                 <Card className="border border-gray-700 bg-secondary/50 backdrop-blur-sm overflow-hidden">
                   <CardContent className="pt-6">
                     <VideoPreview videoFile={videoFile} />
                   </CardContent>
                 </Card>
                 <div>
-                  <Button 
-                    variant="outline" 
-                    onClick={() => setVideoFile(null)}
-                    className="w-full border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-gray-100"
-                  >
+                  <Button variant="outline" onClick={() => setVideoFile(null)} className="w-full border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-gray-100">
                     Choose Different Video
                   </Button>
                 </div>
-              </>
-            )}
+              </>}
 
-            {videoFile && (
-              <ConversionOptions 
-                options={conversionOptions} 
-                onChange={setConversionOptions}
-                videoFile={videoFile}
-              />
-            )}
+            {videoFile && <ConversionOptions options={conversionOptions} onChange={setConversionOptions} videoFile={videoFile} />}
           </div>
 
           <div className="flex flex-col gap-8">
-            {videoFile && (
-              <div className="flex justify-center mb-8">
-                <Button 
-                  onClick={handleConvert}
-                  disabled={isConverting || !videoFile}
-                  className="text-lg px-8 py-6 button-glow bg-blue-600 hover:bg-blue-700 transition-all"
-                >
-                  {isConverting ? (
-                    <>
+            {videoFile && <div className="flex justify-center mb-8">
+                <Button onClick={handleConvert} disabled={isConverting || !videoFile} className="text-lg px-8 py-6 button-glow bg-blue-600 hover:bg-blue-700 transition-all">
+                  {isConverting ? <>
                       <div className="spinner mr-2"></div> Converting...
-                    </>
-                  ) : (
-                    <>
+                    </> : <>
                       <Wand2 className="mr-2" /> Convert to GIF
-                    </>
-                  )}
+                    </>}
                 </Button>
-              </div>
-            )}
+              </div>}
 
-            {gifBlob && (
-              <Card className="border border-gray-700 bg-secondary/50 backdrop-blur-sm overflow-hidden blue-glow">
+            {gifBlob && <Card className="border border-gray-700 bg-secondary/50 backdrop-blur-sm overflow-hidden blue-glow">
                 <CardContent className="pt-6">
                   <GifPreview gifBlob={gifBlob} />
                 </CardContent>
-              </Card>
-            )}
+              </Card>}
           </div>
         </div>
         
@@ -184,7 +150,7 @@ const Index = () => {
         </section>
         
         {/* How to Convert Section */}
-        <section id="how-to" className="py-16 relative z-10 max-w-5xl mx-auto">
+        <section id="how-to" className="py-16 relative z-10 max-w-5xl px-0 mx-[240px]">
           <h2 className="text-3xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-violet-400">
             How to Convert MP4 to GIF
           </h2>
@@ -255,8 +221,6 @@ const Index = () => {
           </div>
         </footer>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
