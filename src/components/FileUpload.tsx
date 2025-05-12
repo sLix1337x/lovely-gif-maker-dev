@@ -23,11 +23,11 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileSelected }) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center gap-4 p-8 border-2 border-dashed border-gray-600/40 rounded-lg bg-black/30 backdrop-blur-sm hover:bg-black/40 transition-colors mx-auto max-w-md">
+    <div className="flex flex-col items-center justify-center gap-4 p-8 border-2 border-dashed border-gray-600/40 rounded-lg bg-black/30 backdrop-blur-sm hover:bg-black/40 transition-colors w-full max-w-md mx-auto">
       <Upload className="h-12 w-12 text-blue-400" />
       <h3 className="text-lg font-medium text-gray-200">Drop your video here</h3>
       <p className="text-sm text-gray-400 text-center">
-        Drag & drop your video file here or click to browse
+        Drag & drop your MP4, WEBM, or AVI video file here or click to browse
       </p>
       <div className="flex items-center justify-center">
         <span className="inline-flex items-center text-xs text-gray-400">
@@ -45,7 +45,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileSelected }) => {
         type="file"
         ref={fileInputRef}
         onChange={handleFileChange}
-        accept="video/mp4,video/webm,video/quicktime"
+        accept="video/mp4,video/webm,video/x-msvideo,.mp4,.webm,.avi"
         className="hidden"
       />
     </div>

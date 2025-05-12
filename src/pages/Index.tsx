@@ -8,8 +8,9 @@ import { Button } from '@/components/ui/button';
 import { convertVideoToGif, ConversionOptions as GifOptions } from '@/utils/gifConverter';
 import { toast } from '@/hooks/use-toast';
 import { Card, CardContent } from '@/components/ui/card';
-import { Wand2, Zap, Lock, CircleDollarSign, Settings, Info, Check } from 'lucide-react';
+import { Wand2, Zap, Lock, CircleDollarSign, Settings, Info, Check, Link } from 'lucide-react';
 import MainNav from '@/components/MainNav';
+import { Link as RouterLink } from 'react-router-dom';
 
 const Index = () => {
   const [videoFile, setVideoFile] = useState<File | null>(null);
@@ -17,7 +18,9 @@ const Index = () => {
   const [isConverting, setIsConverting] = useState(false);
   const [conversionOptions, setConversionOptions] = useState<GifOptions>({
     fps: 10,
-    quality: 10
+    quality: 10,
+    trimEnabled: false,
+    startTime: 0
   });
 
   const handleFileSelected = (file: File) => {
@@ -57,9 +60,9 @@ const Index = () => {
           <div className="glow-effect h-full w-full"></div>
         </div>
         
-        <header className="text-center mb-16 relative z-10">
+        <header className="text-center mb-16 relative z-10 max-w-3xl mx-auto">
           <h1 className="text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-violet-400">MP4 to GIF Converter</h1>
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-300">
             Convert your videos to GIFs right in your browser, no upload needed!
           </p>
         </header>
@@ -94,7 +97,8 @@ const Index = () => {
             {videoFile && (
               <ConversionOptions 
                 options={conversionOptions} 
-                onChange={setConversionOptions} 
+                onChange={setConversionOptions}
+                videoFile={videoFile}
               />
             )}
           </div>
@@ -191,8 +195,8 @@ const Index = () => {
                 <span className="text-white font-medium">1</span>
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-gray-100 mb-2">Upload your MP4 video file</h3>
-                <p className="text-gray-400">Drag & drop your file or click to browse and select a video file.</p>
+                <h3 className="text-xl font-semibold text-gray-100 mb-2">Upload your video file</h3>
+                <p className="text-gray-400">Drag & drop your MP4, WEBM, or AVI file or click to browse and select a video.</p>
               </div>
             </div>
             
@@ -201,8 +205,8 @@ const Index = () => {
                 <span className="text-white font-medium">2</span>
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-gray-100 mb-2">Adjust conversion settings (optional)</h3>
-                <p className="text-gray-400">Set your preferred frame rate, quality, and dimensions for the output GIF.</p>
+                <h3 className="text-xl font-semibold text-gray-100 mb-2">Adjust conversion settings</h3>
+                <p className="text-gray-400">Set your preferred frame rate, quality, dimensions, and trim duration for the perfect GIF.</p>
               </div>
             </div>
             
@@ -221,8 +225,8 @@ const Index = () => {
                 <span className="text-white font-medium">4</span>
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-gray-100 mb-2">Wait a moment for processing to complete</h3>
-                <p className="text-gray-400">The time depends on your video's length and your selected options.</p>
+                <h3 className="text-xl font-semibold text-gray-100 mb-2">Wait for processing to complete</h3>
+                <p className="text-gray-400">Processing time varies based on your video's length and selected options.</p>
               </div>
             </div>
             
@@ -231,8 +235,8 @@ const Index = () => {
                 <span className="text-white font-medium">5</span>
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-gray-100 mb-2">Download your new GIF file</h3>
-                <p className="text-gray-400">Get your newly created GIF and use it wherever you want!</p>
+                <h3 className="text-xl font-semibold text-gray-100 mb-2">Download your new GIF</h3>
+                <p className="text-gray-400">Your GIF is ready to download and share!</p>
               </div>
             </div>
           </div>
@@ -243,9 +247,10 @@ const Index = () => {
           <div className="max-w-5xl mx-auto">
             <p className="mb-4">© 2025 Free MP4 to GIF Converter by sLix1337. All rights reserved.</p>
             <div className="flex justify-center space-x-6">
-              <a href="#" className="hover:text-gray-300">Privacy Policy</a>
-              <a href="#" className="hover:text-gray-300">Terms of Service</a>
-              <a href="#" className="hover:text-gray-300">Contact</a>
+              <RouterLink to="/privacy-policy" className="hover:text-gray-300">Privacy Policy</RouterLink>
+              <RouterLink to="/terms-of-service" className="hover:text-gray-300">Terms of Service</RouterLink>
+              <RouterLink to="/contact" className="hover:text-gray-300">Contact</RouterLink>
+              <RouterLink to="/about" className="hover:text-gray-300">About</RouterLink>
             </div>
           </div>
         </footer>

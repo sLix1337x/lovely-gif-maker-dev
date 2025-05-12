@@ -6,6 +6,9 @@ export interface ConversionOptions {
   quality?: number;
   width?: number;
   height?: number;
+  startTime?: number;
+  duration?: number;
+  trimEnabled?: boolean;
 }
 
 export const convertVideoToGif = (
@@ -17,6 +20,9 @@ export const convertVideoToGif = (
     quality = 10,
     width,
     height,
+    startTime = 0,
+    duration,
+    trimEnabled = false,
   } = options;
 
   return new Promise((resolve, reject) => {
@@ -36,6 +42,12 @@ export const convertVideoToGif = (
     
     // Setup video metadata loading
     video.onloadedmetadata = () => {
+      // Calculate actual start and end times
+      const actualStartTime = trimEnabled ? Math.min(startTime, video.duration) : 0;
+      const actualEndTime = trimEnabled && duration 
+        ? Math.min(actualStartTime + duration, video.duration) 
+        : video.duration;
+      
       // Set canvas dimensions based on options or video dimensions
       const targetWidth = width || video.videoWidth;
       const targetHeight = height || video.videoHeight;
@@ -68,7 +80,7 @@ export const convertVideoToGif = (
       
       // Capture frames
       const captureFrame = () => {
-        if (video.currentTime < video.duration) {
+        if (video.currentTime < actualEndTime) {
           ctx.drawImage(video, 0, 0, targetWidth, targetHeight);
           gif.addFrame(ctx, { copy: true, delay: 1000 / fps });
           
@@ -82,8 +94,8 @@ export const convertVideoToGif = (
       
       video.onseeked = captureFrame;
       
-      // Start capturing
-      video.currentTime = 0;
+      // Start capturing from the start time
+      video.currentTime = actualStartTime;
     };
     
     video.onerror = () => {
