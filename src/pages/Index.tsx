@@ -101,7 +101,7 @@ const Index = () => {
         </div>
         
         {/* Features Section */}
-        <section id="features" className="py-20 relative z-10 max-w-5xl mx-auto">
+        <section id="features" className="relative z-10 max-w-5xl mx-[200px] my-0 py-px px-0">
           <h2 className="text-3xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-violet-400">
             Why Choose Our MP4 to GIF Converter?
           </h2>
@@ -150,7 +150,7 @@ const Index = () => {
         </section>
         
         {/* How to Convert Section */}
-        <section id="how-to" className="py-16 relative z-10 max-w-5xl px-0 mx-[240px]">
+        <section id="how-to" className="relative z-10 max-w-5xl px-0 mx-[240px] py-[50px]">
           <h2 className="text-3xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-violet-400">
             How to Convert MP4 to GIF
           </h2>
