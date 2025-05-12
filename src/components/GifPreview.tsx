@@ -37,7 +37,7 @@ const GifPreview: React.FC<GifPreviewProps> = ({ gifBlob }) => {
           style={{ maxHeight: '400px' }}
         />
       </div>
-      <Button onClick={handleDownload} className="w-full">
+      <Button onClick={handleDownload} className="w-full bg-blue-600 hover:bg-blue-700 button-glow">
         <Download className="mr-2 h-4 w-4" /> Download GIF
       </Button>
     </div>

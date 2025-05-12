@@ -9,6 +9,7 @@ import { convertVideoToGif, ConversionOptions as GifOptions } from '@/utils/gifC
 import { toast } from '@/hooks/use-toast';
 import { Card, CardContent } from '@/components/ui/card';
 import { Wand2 } from 'lucide-react';
+import MainNav from '@/components/MainNav';
 
 const Index = () => {
   const [videoFile, setVideoFile] = useState<File | null>(null);
@@ -49,26 +50,31 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-indigo-50">
-      <div className="container mx-auto py-8 px-4">
-        <header className="text-center mb-10">
-          <h1 className="text-4xl font-bold mb-4 text-blue-900">MP4 to GIF Converter</h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+    <div className="min-h-screen bg-gradient-dark">
+      <MainNav />
+      <div className="container mx-auto py-16 px-4 relative">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-96 pointer-events-none">
+          <div className="glow-effect h-full w-full"></div>
+        </div>
+        
+        <header className="text-center mb-16 relative z-10">
+          <h1 className="text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-violet-400">MP4 to GIF Converter</h1>
+          <p className="text-lg text-gray-300 max-w-2xl mx-auto">
             Convert your videos to GIFs right in your browser, no upload needed!
           </p>
         </header>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-10 relative z-10">
           <div className="space-y-8">
             {!videoFile ? (
-              <Card>
+              <Card className="border border-gray-700 bg-secondary/50 backdrop-blur-sm overflow-hidden">
                 <CardContent className="pt-6">
                   <FileUpload onFileSelected={handleFileSelected} />
                 </CardContent>
               </Card>
             ) : (
               <>
-                <Card>
+                <Card className="border border-gray-700 bg-secondary/50 backdrop-blur-sm overflow-hidden">
                   <CardContent className="pt-6">
                     <VideoPreview videoFile={videoFile} />
                   </CardContent>
@@ -77,7 +83,7 @@ const Index = () => {
                   <Button 
                     variant="outline" 
                     onClick={() => setVideoFile(null)}
-                    className="w-full"
+                    className="w-full border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-gray-100"
                   >
                     Choose Different Video
                   </Button>
@@ -95,11 +101,11 @@ const Index = () => {
 
           <div className="flex flex-col gap-8">
             {videoFile && (
-              <div className="flex justify-center">
+              <div className="flex justify-center mb-8">
                 <Button 
                   onClick={handleConvert}
                   disabled={isConverting || !videoFile}
-                  className="text-lg px-8 py-6"
+                  className="text-lg px-8 py-6 button-glow bg-blue-600 hover:bg-blue-700 transition-all"
                 >
                   {isConverting ? (
                     <>
@@ -115,7 +121,7 @@ const Index = () => {
             )}
 
             {gifBlob && (
-              <Card>
+              <Card className="border border-gray-700 bg-secondary/50 backdrop-blur-sm overflow-hidden blue-glow">
                 <CardContent className="pt-6">
                   <GifPreview gifBlob={gifBlob} />
                 </CardContent>
